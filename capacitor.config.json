@@ -1,0 +1,12 @@
+{
+  "appId": "az.cvyaradan.app",
+  "appName": "CV Yaradan",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false,
+    "adjustMarginsForEdgeToEdge": "auto"
+  },
+  "plugins": {
+    "SplashScreen": { "launchShowDuration": 800, "backgroundColor": "#2563eb" }
+  }
+}

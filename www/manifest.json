@@ -1,0 +1,14 @@
+{
+  "name": "CV Yaradan",
+  "short_name": "CV Yaradan",
+  "description": "Peşəkar CV hazırla — 8 şablon, PDF yükləmə",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f1f4f9",
+  "theme_color": "#2563eb",
+  "lang": "az",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
