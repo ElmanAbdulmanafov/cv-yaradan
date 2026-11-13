@@ -73,7 +73,15 @@ Yan nüsxə layihə kökündə: `CV-Yaradan-release.aab`. Test üçün imzalı A
 
 Hər yeni yükləmədə `android/app/build.gradle` içində `versionCode`-u 1 artırın (1 → 2 → 3…) və `versionName`-i yeniləyin.
 
-### 3. Play Console addımları
+### 3. Play Console vəziyyəti (13 noyabr 2026)
+
+- Tətbiq: **CV Creator** (`az.cvyaradan.app`), hesab EduOnline-Self
+- App content anketləri, kateqoriya (Business), əlaqə məlumatları və mağaza səhifəsi doldurulub
+- Internal testing: release 1 (1.0.0) dərc olunub, testçi siyahıları "Testers" (19) və "Tester 2" (1) seçilib
+- Test linki: https://play.google.com/apps/internaltest/4701364262195375027
+- Növbəti: Closed testing (12 testçi, 14 gün) → Apply for production. Həmçinin "Declare your trader status" doldurulmalıdır.
+
+### 3a. Play Console addımları (ümumi)
 
 1. [play.google.com/console](https://play.google.com/console) — developer hesabı (birdəfəlik 25 USD).
 2. **Create app** → ad "CV Yaradan", App, Free, dil Azerbaijani.
