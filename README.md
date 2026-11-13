@@ -79,7 +79,10 @@ Hər yeni yükləmədə `android/app/build.gradle` içində `versionCode`-u 1 ar
 - App content anketləri, kateqoriya (Business), əlaqə məlumatları və mağaza səhifəsi doldurulub
 - Internal testing: release 1 (1.0.0) dərc olunub, testçi siyahıları "Testers" (19) və "Tester 2" (1) seçilib
 - Test linki: https://play.google.com/apps/internaltest/4701364262195375027
-- Növbəti: Closed testing (12 testçi, 14 gün) → Apply for production. Həmçinin "Declare your trader status" doldurulmalıdır.
+- Closed testing - Alpha: release 1 (1.0.0), 178 ölkə, testçilər "Testers" + "Tester 2". 15 dəyişiklik 13.11.2026-da Google yoxlamasına göndərilib.
+- Closed test linki (təsdiqdən sonra): https://play.google.com/apps/testing/az.cvyaradan.app
+- Növbəti: 12+ testçi 14 gün qoşulu qalsın → Dashboard → Apply for production. Həmçinin "Declare your trader status" doldurulmalıdır.
+- Təşkilat hesabı mümkün deyil (qeydiyyatlı şirkət və D-U-N-S yoxdur).
 
 ### 3a. Play Console addımları (ümumi)
 
