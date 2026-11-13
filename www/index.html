@@ -264,6 +264,8 @@
     .page{box-shadow:none;margin:0;width:210mm;min-height:auto}
     *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
+  .lang-sel{width:auto;flex:none;padding:8px 6px;font-weight:600;cursor:pointer;appearance:auto;-webkit-appearance:auto}
+  .tpl .tpl-name{display:block;line-height:1.2}
 </style>
 </head>
 <body>
@@ -271,11 +273,14 @@
 <header>
   <div class="logo"><span class="badge">CV</span><span class="txt">CV Creator</span></div>
   <div class="toolbar">
-    <button class="btn" id="btnImport" title="JSON faylından yüklə">📂<span class="lbl">Yüklə</span></button>
-    <button class="btn" id="btnExport" title="JSON kimi saxla">💾<span class="lbl">Saxla (JSON)</span></button>
-    <button class="btn" id="btnSample" title="Nümunə doldur">✨<span class="lbl">Nümunə</span></button>
-    <button class="btn danger" id="btnClear" title="Təmizlə">🗑<span class="lbl">Təmizlə</span></button>
-    <button class="btn primary" id="btnPrint">⬇ PDF yüklə</button>
+    <select class="btn lang-sel" id="uiLang" aria-label="Language / Dil / Язык">
+      <option value="az">🌐 AZ</option><option value="en">🌐 EN</option><option value="ru">🌐 RU</option>
+    </select>
+    <button class="btn" id="btnImport" data-i-title="importTitle">📂<span class="lbl" data-i="import">Yüklə</span></button>
+    <button class="btn" id="btnExport" data-i-title="exportTitle">💾<span class="lbl" data-i="export">Saxla (JSON)</span></button>
+    <button class="btn" id="btnSample" data-i-title="sampleTitle">✨<span class="lbl" data-i="sample">Nümunə</span></button>
+    <button class="btn danger" id="btnClear" data-i-title="clear">🗑<span class="lbl" data-i="clear">Təmizlə</span></button>
+    <button class="btn primary" id="btnPrint" data-i="downloadPdf">⬇ PDF yüklə</button>
     <input type="file" id="fileImport" accept="application/json,.json" hidden>
   </div>
 </header>
@@ -285,10 +290,10 @@
   <section class="editor" id="editor">
 
     <div class="card">
-      <div class="card-head" data-toggle>🎨 Dizayn <span class="chev">▾</span></div>
+      <div class="card-head" data-toggle><span data-i="cardDesign">🎨 Dizayn</span> <span class="chev">▾</span></div>
       <div class="card-body">
-        <div class="field"><label>Şablon</label><div class="templates" id="templates"></div></div>
-        <div class="field"><label>Əsas rəng</label>
+        <div class="field"><label data-i="template">Şablon</label><div class="templates" id="templates"></div></div>
+        <div class="field"><label data-i="accent">Əsas rəng</label>
           <div class="colors" id="colors">
             <div class="swatch active" style="background:#2563eb" data-c="#2563eb"></div>
             <div class="swatch" style="background:#0f766e" data-c="#0f766e"></div>
@@ -297,62 +302,62 @@
             <div class="swatch" style="background:#ea580c" data-c="#ea580c"></div>
             <div class="swatch" style="background:#b45309" data-c="#b45309"></div>
             <div class="swatch" style="background:#1e293b" data-c="#1e293b"></div>
-            <input type="color" id="customColor" value="#2563eb" title="Xüsusi rəng">
+            <input type="color" id="customColor" value="#2563eb" data-i-title="customColor">
           </div>
         </div>
-        <div class="range-row"><label>Şrift ölçüsü</label><input type="range" id="fontSize" min="9" max="12.5" step="0.5" value="10.5"><span id="fontSizeVal">10.5pt</span></div>
+        <div class="range-row"><label data-i="fontSize">Şrift ölçüsü</label><input type="range" id="fontSize" min="9" max="12.5" step="0.5" value="10.5"><span id="fontSizeVal">10.5pt</span></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-head" data-toggle>👤 Şəxsi məlumatlar <span class="chev">▾</span></div>
+      <div class="card-head" data-toggle><span data-i="cardPersonal">👤 Şəxsi məlumatlar</span> <span class="chev">▾</span></div>
       <div class="card-body">
         <div class="photo-row">
           <img class="photo-preview" id="photoPreview" alt="" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394a3b8'><path d='M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5c0-3-4-5.5-9-5.5z'/></svg>">
           <div style="display:flex;flex-direction:column;gap:6px">
             <input type="file" id="photo" accept="image/*" hidden>
-            <button class="btn small" id="pickPhoto">📷 Şəkil seç</button>
-            <button class="btn small" id="removePhoto">Şəkli sil</button>
+            <button class="btn small" id="pickPhoto" data-i="pickPhoto">📷 Şəkil seç</button>
+            <button class="btn small" id="removePhoto" data-i="removePhoto">Şəkli sil</button>
           </div>
         </div>
         <div class="row">
-          <div class="field"><label>Ad və soyad *</label><input type="text" data-k="name" placeholder="Elman Məmmədov"></div>
-          <div class="field"><label>Vəzifə / İxtisas</label><input type="text" data-k="title" placeholder="Frontend Developer"></div>
+          <div class="field"><label data-i="fName">Ad və soyad *</label><input type="text" data-k="name" data-i-ph="phName"></div>
+          <div class="field"><label data-i="fTitle">Vəzifə / İxtisas</label><input type="text" data-k="title" data-i-ph="phTitle"></div>
         </div>
         <div class="row">
-          <div class="field"><label>E-poçt</label><input type="email" data-k="email" placeholder="ad@mail.com"></div>
-          <div class="field"><label>Telefon</label><input type="tel" data-k="phone" placeholder="+994 50 000 00 00"></div>
+          <div class="field"><label data-i="fEmail">E-poçt</label><input type="email" data-k="email" data-i-ph="phEmail"></div>
+          <div class="field"><label data-i="fPhone">Telefon</label><input type="tel" data-k="phone" data-i-ph="phPhone"></div>
         </div>
         <div class="row">
-          <div class="field"><label>Şəhər / Ünvan</label><input type="text" data-k="location" placeholder="Bakı, Azərbaycan"></div>
-          <div class="field"><label>Veb-sayt / LinkedIn</label><input type="url" data-k="website" placeholder="linkedin.com/in/..."></div>
+          <div class="field"><label data-i="fLocation">Şəhər / Ünvan</label><input type="text" data-k="location" data-i-ph="phLocation"></div>
+          <div class="field"><label data-i="fWebsite">Veb-sayt / LinkedIn</label><input type="url" data-k="website" placeholder="linkedin.com/in/..."></div>
         </div>
         <div class="row">
-          <div class="field"><label>Doğum tarixi</label><input type="text" data-k="birth" placeholder="01.01.1995"></div>
-          <div class="field"><label>Sürücülük vəsiqəsi</label><input type="text" data-k="license" placeholder="B kateqoriya"></div>
+          <div class="field"><label data-i="fBirth">Doğum tarixi</label><input type="text" data-k="birth" placeholder="01.01.1995"></div>
+          <div class="field"><label data-i="fLicense">Sürücülük vəsiqəsi</label><input type="text" data-k="license" data-i-ph="phLicense"></div>
         </div>
-        <div class="field"><label>Haqqımda (qısa xülasə)</label><textarea data-k="summary" placeholder="3-4 cümlə ilə özünüz, təcrübəniz və məqsədləriniz haqqında yazın..."></textarea></div>
+        <div class="field"><label data-i="fSummary">Haqqımda (qısa xülasə)</label><textarea data-k="summary" data-i-ph="phSummary"></textarea></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-head" data-toggle>💼 İş təcrübəsi <span class="chev">▾</span></div>
-      <div class="card-body"><div id="expList"></div><button class="btn small" id="addExp">＋ Təcrübə əlavə et</button></div>
+      <div class="card-head" data-toggle><span data-i="cardExp">💼 İş təcrübəsi</span> <span class="chev">▾</span></div>
+      <div class="card-body"><div id="expList"></div><button class="btn small" id="addExp" data-i="addExp">＋ Təcrübə əlavə et</button></div>
     </div>
 
     <div class="card">
-      <div class="card-head" data-toggle>🎓 Təhsil <span class="chev">▾</span></div>
-      <div class="card-body"><div id="eduList"></div><button class="btn small" id="addEdu">＋ Təhsil əlavə et</button></div>
+      <div class="card-head" data-toggle><span data-i="cardEdu">🎓 Təhsil</span> <span class="chev">▾</span></div>
+      <div class="card-body"><div id="eduList"></div><button class="btn small" id="addEdu" data-i="addEdu">＋ Təhsil əlavə et</button></div>
     </div>
 
     <div class="card">
-      <div class="card-head" data-toggle>🛠 Bacarıqlar <span class="chev">▾</span></div>
+      <div class="card-head" data-toggle><span data-i="cardSkills">🛠 Bacarıqlar</span> <span class="chev">▾</span></div>
       <div class="card-body">
-        <div class="field"><label>Bacarıq yazın və “Əlavə et” basın</label>
-          <div class="row" style="grid-template-columns:1fr 110px 44px">
+        <div class="field"><label data-i="skillHelp">Bacarıq yazın və “＋” basın</label>
+          <div class="row" style="grid-template-columns:1fr 120px 44px">
             <input type="text" id="skillInput" placeholder="JavaScript" enterkeyhint="done">
-            <select id="skillLevel"><option value="100">Ekspert</option><option value="80" selected>Yaxşı</option><option value="60">Orta</option><option value="40">Başlanğıc</option></select>
-            <button class="btn small" id="addSkill" title="Əlavə et">＋</button>
+            <select id="skillLevel"></select>
+            <button class="btn small" id="addSkill" data-i-title="add">＋</button>
           </div>
         </div>
         <div class="tags" id="skillTags"></div>
@@ -360,13 +365,13 @@
     </div>
 
     <div class="card">
-      <div class="card-head" data-toggle>🌍 Dillər <span class="chev">▾</span></div>
+      <div class="card-head" data-toggle><span data-i="cardLangs">🌍 Dillər</span> <span class="chev">▾</span></div>
       <div class="card-body">
-        <div class="field"><label>Dil yazın və “Əlavə et” basın</label>
-          <div class="row" style="grid-template-columns:1fr 120px 44px">
-            <input type="text" id="langInput" placeholder="İngilis dili" enterkeyhint="done">
-            <select id="langLevel"><option>Ana dili</option><option selected>Səlis (C1)</option><option>Orta (B2)</option><option>Orta (B1)</option><option>Başlanğıc (A2)</option><option>Başlanğıc (A1)</option></select>
-            <button class="btn small" id="addLang" title="Əlavə et">＋</button>
+        <div class="field"><label data-i="langHelp">Dil yazın və “＋” basın</label>
+          <div class="row" style="grid-template-columns:1fr 140px 44px">
+            <input type="text" id="langInput" data-i-ph="phLang" enterkeyhint="done">
+            <select id="langLevel"></select>
+            <button class="btn small" id="addLang" data-i-title="add">＋</button>
           </div>
         </div>
         <div class="tags" id="langTags"></div>
@@ -374,16 +379,16 @@
     </div>
 
     <div class="card collapsed">
-      <div class="card-head" data-toggle>🏅 Sertifikatlar və kurslar <span class="chev">▾</span></div>
-      <div class="card-body"><div id="certList"></div><button class="btn small" id="addCert">＋ Sertifikat əlavə et</button></div>
+      <div class="card-head" data-toggle><span data-i="cardCerts">🏅 Sertifikatlar və kurslar</span> <span class="chev">▾</span></div>
+      <div class="card-body"><div id="certList"></div><button class="btn small" id="addCert" data-i="addCert">＋ Sertifikat əlavə et</button></div>
     </div>
 
     <div class="card collapsed">
-      <div class="card-head" data-toggle>⭐ Maraqlar / Hobbilər <span class="chev">▾</span></div>
-      <div class="card-body"><div class="field"><label>Vergüllə ayırın</label><input type="text" data-k="hobbies" placeholder="Şahmat, fotoqrafiya, üzgüçülük"></div></div>
+      <div class="card-head" data-toggle><span data-i="cardHobbies">⭐ Maraqlar / Hobbilər</span> <span class="chev">▾</span></div>
+      <div class="card-body"><div class="field"><label data-i="hobbiesHelp">Vergüllə ayırın</label><input type="text" data-k="hobbies" data-i-ph="phHobbies"></div></div>
     </div>
 
-    <p class="hint desktop" style="text-align:center">Məlumatlar avtomatik olaraq cihazınızda saxlanılır.</p>
+    <p class="hint desktop" style="text-align:center" data-i="autosave">Məlumatlar avtomatik olaraq cihazınızda saxlanılır.</p>
   </section>
 
   <!-- ===================== PREVIEW ===================== -->
@@ -395,39 +400,165 @@
 </main>
 
 <nav class="tabbar" id="tabbar">
-  <button data-view="edit" class="active"><span class="ic">✏️</span>Redaktə</button>
-  <button data-view="preview"><span class="ic">👁️</span>Önizləmə</button>
+  <button data-view="edit" class="active"><span class="ic">✏️</span><span data-i="tabEdit">Redaktə</span></button>
+  <button data-view="preview"><span class="ic">👁️</span><span data-i="tabPreview">Önizləmə</span></button>
   <button class="pdf" id="btnPdfMobile"><span class="ic">⬇️</span>PDF</button>
 </nav>
 
 <div class="toast" id="toast"></div>
-<div class="overlay" id="overlay"><div><div class="spinner"></div>PDF hazırlanır…</div></div>
-<div class="overlay dialog" id="confirmDlg"><div class="dlg-box"><p id="confirmMsg"></p><div class="dlg-actions"><button class="btn" id="confirmNo">Ləğv et</button><button class="btn danger" id="confirmYes">Bəli, sil</button></div></div></div>
+<div class="overlay" id="overlay"><div><div class="spinner"></div><span data-i="pdfBusy">PDF hazırlanır…</span></div></div>
+<div class="overlay dialog" id="confirmDlg"><div class="dlg-box"><p id="confirmMsg"></p><div class="dlg-actions"><button class="btn" id="confirmNo" data-i="cancel">Ləğv et</button><button class="btn danger" id="confirmYes" data-i="yesDelete">Bəli, sil</button></div></div></div>
 
 <script src="lib/html2pdf.bundle.min.js"></script>
 <script>
+/* ==================== I18N (AZ / EN / RU) ==================== */
+const I18N = {
+  az: {
+    docTitle:'CV Creator — Peşəkar CV hazırla',
+    ui:{ import:'Yüklə', importTitle:'JSON faylından yüklə', export:'Saxla (JSON)', exportTitle:'JSON kimi saxla', sample:'Nümunə', sampleTitle:'Nümunə doldur',
+      clear:'Təmizlə', downloadPdf:'⬇ PDF yüklə', cardDesign:'🎨 Dizayn', template:'Şablon', accent:'Əsas rəng', customColor:'Xüsusi rəng', fontSize:'Şrift ölçüsü',
+      cardPersonal:'👤 Şəxsi məlumatlar', pickPhoto:'📷 Şəkil seç', removePhoto:'Şəkli sil',
+      fName:'Ad və soyad *', fTitle:'Vəzifə / İxtisas', fEmail:'E-poçt', fPhone:'Telefon', fLocation:'Şəhər / Ünvan', fWebsite:'Veb-sayt / LinkedIn',
+      fBirth:'Doğum tarixi', fLicense:'Sürücülük vəsiqəsi', fSummary:'Haqqımda (qısa xülasə)',
+      phName:'Elman Məmmədov', phTitle:'Frontend Developer', phEmail:'ad@mail.com', phPhone:'+994 50 000 00 00', phLocation:'Bakı, Azərbaycan', phLicense:'B kateqoriya',
+      phSummary:'3-4 cümlə ilə özünüz, təcrübəniz və məqsədləriniz haqqında yazın...', phLang:'İngilis dili', phHobbies:'Şahmat, fotoqrafiya, üzgüçülük',
+      cardExp:'💼 İş təcrübəsi', addExp:'＋ Təcrübə əlavə et', cardEdu:'🎓 Təhsil', addEdu:'＋ Təhsil əlavə et',
+      cardSkills:'🛠 Bacarıqlar', skillHelp:'Bacarıq yazın və “＋” basın', cardLangs:'🌍 Dillər', langHelp:'Dil yazın və “＋” basın', add:'Əlavə et',
+      cardCerts:'🏅 Sertifikatlar və kurslar', addCert:'＋ Sertifikat əlavə et', cardHobbies:'⭐ Maraqlar / Hobbilər', hobbiesHelp:'Vergüllə ayırın',
+      autosave:'Məlumatlar avtomatik olaraq cihazınızda saxlanılır.', tabEdit:'Redaktə', tabPreview:'Önizləmə', pdfBusy:'PDF hazırlanır…',
+      cancel:'Ləğv et', yesDelete:'Bəli, sil', up:'Yuxarı', down:'Aşağı', del:'Sil' },
+    msg:{ photoErr:'Şəkil oxuna bilmədi', needName:'Əvvəlcə ad və soyadınızı yazın', pdfDone:'PDF yükləndi', pdfFail:'PDF yaradıla bilmədi: ',
+      shareCv:'CV-ni saxla və ya paylaş', shareJson:'JSON faylını saxla', saveFail:'Saxlanıla bilmədi', jsonDone:'JSON faylı yükləndi',
+      loaded:'CV yükləndi', readFail:'Fayl oxuna bilmədi', confirmClear:'Bütün məlumatlar silinsin? Bu əməliyyat geri qaytarıla bilməz.',
+      cleared:'Təmizləndi', sampleDone:'Nümunə məlumatlar dolduruldu' },
+    sec:{ about:'Haqqımda', profile:'Profil', exp:'İş təcrübəsi', edu:'Təhsil', certs:'Sertifikatlar', skills:'Bacarıqlar', langs:'Dillər', hobbies:'Maraqlar', contact:'Əlaqə',
+      fullName:'Ad Soyad', position:'Vəzifə', degree:'İxtisas' },
+    months:['Yan','Fev','Mar','Apr','May','İyn','İyl','Avq','Sen','Okt','Noy','Dek'], present:'Davam edir',
+    skill:{100:'Ekspert',80:'Yaxşı',60:'Orta',40:'Başlanğıc'},
+    lvl:{native:'Ana dili',C1:'Səlis (C1)',B2:'Orta (B2)',B1:'Orta (B1)',A2:'Başlanğıc (A2)',A1:'Başlanğıc (A1)'},
+    tpl:{modern:'Modern',classic:'Klassik',minimal:'Minimal',creative:'Kreativ',corporate:'Korporativ',elegant:'Elegant',timeline:'Zaman xətti',compact:'Kompakt'},
+    fields:{
+      experience:{position:['Vəzifə','Frontend Developer'],company:['Şirkət','ABC MMC'],start:['Başlama'],end:['Bitmə (boş = davam edir)'],location:['Yer','Bakı'],
+        desc:['Təsvir / nailiyyətlər (hər sətir ayrı bənd)','• Komandaya rəhbərlik etdim\n• Satışları 30% artırdım']},
+      education:{degree:['Dərəcə / İxtisas','Bakalavr, Kompüter elmləri'],school:['Təhsil müəssisəsi','Bakı Dövlət Universiteti'],start:['Başlama'],end:['Bitmə'],
+        desc:['Əlavə məlumat (GPA, fəxri fərman və s.)','GPA 91/100']},
+      certificates:{name:['Sertifikat adı','Google UX Design'],issuer:['Verən təşkilat','Coursera'],date:['Tarix'],url:['Link (istəyə görə)','https://...']} },
+    sample:{ name:'Elman Məmmədov', title:'Frontend Developer', location:'Bakı, Azərbaycan', license:'B kateqoriya',
+      summary:'5 ildən artıq təcrübəsi olan Frontend Developer. React, TypeScript və modern veb texnologiyaları ilə yüksək performanslı, istifadəçi dostu interfeyslər hazırlayıram. Komanda ilə işləməyi və yeni texnologiyalar öyrənməyi sevirəm.',
+      exp:[['Senior Frontend Developer','TechAz MMC','Bakı','• 6 nəfərlik frontend komandasına rəhbərlik etdim\n• Səhifə yüklənmə sürətini 45% artırdım\n• Dizayn sistemini sıfırdan qurdum'],
+           ['Frontend Developer','Digital Solutions','Bakı','• React və Redux ilə 10+ layihə hazırladım\n• REST API inteqrasiyaları və test avtomatlaşdırması']],
+      edu:['Bakalavr, İnformasiya texnologiyaları','Azərbaycan Texniki Universiteti'],
+      langs:[['Azərbaycan dili','native'],['İngilis dili','C1'],['Rus dili','B2']], hobbies:'Şahmat, fotoqrafiya, dağ turizmi' }
+  },
+  en: {
+    docTitle:'CV Creator — Build a professional CV',
+    ui:{ import:'Open', importTitle:'Load from a JSON file', export:'Save (JSON)', exportTitle:'Save as JSON', sample:'Sample', sampleTitle:'Fill with sample data',
+      clear:'Clear', downloadPdf:'⬇ Download PDF', cardDesign:'🎨 Design', template:'Template', accent:'Accent colour', customColor:'Custom colour', fontSize:'Font size',
+      cardPersonal:'👤 Personal details', pickPhoto:'📷 Choose photo', removePhoto:'Remove photo',
+      fName:'Full name *', fTitle:'Job title', fEmail:'Email', fPhone:'Phone', fLocation:'City / Address', fWebsite:'Website / LinkedIn',
+      fBirth:'Date of birth', fLicense:'Driving licence', fSummary:'About me (short summary)',
+      phName:'John Smith', phTitle:'Frontend Developer', phEmail:'name@mail.com', phPhone:'+1 555 000 0000', phLocation:'Baku, Azerbaijan', phLicense:'Category B',
+      phSummary:'Write 3-4 sentences about yourself, your experience and your goals...', phLang:'English', phHobbies:'Chess, photography, swimming',
+      cardExp:'💼 Work experience', addExp:'＋ Add experience', cardEdu:'🎓 Education', addEdu:'＋ Add education',
+      cardSkills:'🛠 Skills', skillHelp:'Type a skill and press “＋”', cardLangs:'🌍 Languages', langHelp:'Type a language and press “＋”', add:'Add',
+      cardCerts:'🏅 Certificates & courses', addCert:'＋ Add certificate', cardHobbies:'⭐ Interests / Hobbies', hobbiesHelp:'Separate with commas',
+      autosave:'Your data is saved automatically on this device.', tabEdit:'Edit', tabPreview:'Preview', pdfBusy:'Generating PDF…',
+      cancel:'Cancel', yesDelete:'Yes, delete', up:'Up', down:'Down', del:'Delete' },
+    msg:{ photoErr:'Could not read the image', needName:'Please enter your full name first', pdfDone:'PDF downloaded', pdfFail:'Could not create PDF: ',
+      shareCv:'Save or share your CV', shareJson:'Save the JSON file', saveFail:'Could not save', jsonDone:'JSON file downloaded',
+      loaded:'CV loaded', readFail:'Could not read the file', confirmClear:'Delete all data? This cannot be undone.',
+      cleared:'Cleared', sampleDone:'Sample data filled in' },
+    sec:{ about:'About me', profile:'Profile', exp:'Work experience', edu:'Education', certs:'Certifications', skills:'Skills', langs:'Languages', hobbies:'Interests', contact:'Contact',
+      fullName:'Full Name', position:'Position', degree:'Degree' },
+    months:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], present:'Present',
+    skill:{100:'Expert',80:'Advanced',60:'Intermediate',40:'Beginner'},
+    lvl:{native:'Native',C1:'Fluent (C1)',B2:'Upper-intermediate (B2)',B1:'Intermediate (B1)',A2:'Elementary (A2)',A1:'Beginner (A1)'},
+    tpl:{modern:'Modern',classic:'Classic',minimal:'Minimal',creative:'Creative',corporate:'Corporate',elegant:'Elegant',timeline:'Timeline',compact:'Compact'},
+    fields:{
+      experience:{position:['Position','Frontend Developer'],company:['Company','ABC Ltd'],start:['Start'],end:['End (empty = present)'],location:['Location','Baku'],
+        desc:['Description / achievements (one per line)','• Led a team of 5 developers\n• Increased sales by 30%']},
+      education:{degree:['Degree / Major','BSc, Computer Science'],school:['Institution','Baku State University'],start:['Start'],end:['End'],
+        desc:['Additional info (GPA, honours, etc.)','GPA 3.8/4.0']},
+      certificates:{name:['Certificate name','Google UX Design'],issuer:['Issuer','Coursera'],date:['Date'],url:['Link (optional)','https://...']} },
+    sample:{ name:'Elman Mammadov', title:'Frontend Developer', location:'Baku, Azerbaijan', license:'Category B',
+      summary:'Frontend Developer with 5+ years of experience. I build fast, user-friendly interfaces with React, TypeScript and modern web technologies. I enjoy teamwork and learning new technologies.',
+      exp:[['Senior Frontend Developer','TechAz LLC','Baku','• Led a frontend team of 6 engineers\n• Improved page load speed by 45%\n• Built the design system from scratch'],
+           ['Frontend Developer','Digital Solutions','Baku','• Delivered 10+ projects with React and Redux\n• REST API integrations and test automation']],
+      edu:['BSc, Information Technology','Azerbaijan Technical University'],
+      langs:[['Azerbaijani','native'],['English','C1'],['Russian','B2']], hobbies:'Chess, photography, hiking' }
+  },
+  ru: {
+    docTitle:'CV Creator — Создайте профессиональное резюме',
+    ui:{ import:'Открыть', importTitle:'Загрузить из JSON-файла', export:'Сохранить (JSON)', exportTitle:'Сохранить как JSON', sample:'Пример', sampleTitle:'Заполнить примером',
+      clear:'Очистить', downloadPdf:'⬇ Скачать PDF', cardDesign:'🎨 Дизайн', template:'Шаблон', accent:'Основной цвет', customColor:'Свой цвет', fontSize:'Размер шрифта',
+      cardPersonal:'👤 Личные данные', pickPhoto:'📷 Выбрать фото', removePhoto:'Удалить фото',
+      fName:'Имя и фамилия *', fTitle:'Должность', fEmail:'Эл. почта', fPhone:'Телефон', fLocation:'Город / Адрес', fWebsite:'Сайт / LinkedIn',
+      fBirth:'Дата рождения', fLicense:'Водительские права', fSummary:'О себе (кратко)',
+      phName:'Иван Петров', phTitle:'Frontend-разработчик', phEmail:'name@mail.com', phPhone:'+7 900 000 00 00', phLocation:'Баку, Азербайджан', phLicense:'Категория B',
+      phSummary:'Напишите 3-4 предложения о себе, своём опыте и целях...', phLang:'Английский', phHobbies:'Шахматы, фотография, плавание',
+      cardExp:'💼 Опыт работы', addExp:'＋ Добавить опыт', cardEdu:'🎓 Образование', addEdu:'＋ Добавить образование',
+      cardSkills:'🛠 Навыки', skillHelp:'Введите навык и нажмите «＋»', cardLangs:'🌍 Языки', langHelp:'Введите язык и нажмите «＋»', add:'Добавить',
+      cardCerts:'🏅 Сертификаты и курсы', addCert:'＋ Добавить сертификат', cardHobbies:'⭐ Интересы / Хобби', hobbiesHelp:'Через запятую',
+      autosave:'Данные автоматически сохраняются на этом устройстве.', tabEdit:'Редактор', tabPreview:'Просмотр', pdfBusy:'Создание PDF…',
+      cancel:'Отмена', yesDelete:'Да, удалить', up:'Вверх', down:'Вниз', del:'Удалить' },
+    msg:{ photoErr:'Не удалось прочитать изображение', needName:'Сначала введите имя и фамилию', pdfDone:'PDF скачан', pdfFail:'Не удалось создать PDF: ',
+      shareCv:'Сохранить или отправить резюме', shareJson:'Сохранить JSON-файл', saveFail:'Не удалось сохранить', jsonDone:'JSON-файл скачан',
+      loaded:'Резюме загружено', readFail:'Не удалось прочитать файл', confirmClear:'Удалить все данные? Это действие нельзя отменить.',
+      cleared:'Очищено', sampleDone:'Заполнено примером' },
+    sec:{ about:'О себе', profile:'Профиль', exp:'Опыт работы', edu:'Образование', certs:'Сертификаты', skills:'Навыки', langs:'Языки', hobbies:'Интересы', contact:'Контакты',
+      fullName:'Имя Фамилия', position:'Должность', degree:'Специальность' },
+    months:['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'], present:'н.в.',
+    skill:{100:'Эксперт',80:'Продвинутый',60:'Средний',40:'Начальный'},
+    lvl:{native:'Родной',C1:'Свободно (C1)',B2:'Выше среднего (B2)',B1:'Средний (B1)',A2:'Базовый (A2)',A1:'Начальный (A1)'},
+    tpl:{modern:'Модерн',classic:'Классика',minimal:'Минимал',creative:'Креатив',corporate:'Корпоратив',elegant:'Элегант',timeline:'Хронология',compact:'Компакт'},
+    fields:{
+      experience:{position:['Должность','Frontend-разработчик'],company:['Компания','ООО «ABC»'],start:['Начало'],end:['Окончание (пусто = по н.в.)'],location:['Город','Баку'],
+        desc:['Описание / достижения (каждая строка — пункт)','• Руководил командой из 5 человек\n• Увеличил продажи на 30%']},
+      education:{degree:['Степень / Специальность','Бакалавр, Информатика'],school:['Учебное заведение','Бакинский государственный университет'],start:['Начало'],end:['Окончание'],
+        desc:['Доп. информация (средний балл, отличия и т.д.)','Средний балл 4.8/5']},
+      certificates:{name:['Название сертификата','Google UX Design'],issuer:['Организация','Coursera'],date:['Дата'],url:['Ссылка (необязательно)','https://...']} },
+    sample:{ name:'Эльман Мамедов', title:'Frontend-разработчик', location:'Баку, Азербайджан', license:'Категория B',
+      summary:'Frontend-разработчик с опытом более 5 лет. Создаю быстрые и удобные интерфейсы на React, TypeScript и современных веб-технологиях. Люблю работать в команде и изучать новые технологии.',
+      exp:[['Ведущий Frontend-разработчик','ООО «TechAz»','Баку','• Руководил frontend-командой из 6 человек\n• Ускорил загрузку страниц на 45%\n• Создал дизайн-систему с нуля'],
+           ['Frontend-разработчик','Digital Solutions','Баку','• Реализовал 10+ проектов на React и Redux\n• Интеграции REST API и автоматизация тестирования']],
+      edu:['Бакалавр, Информационные технологии','Азербайджанский технический университет'],
+      langs:[['Азербайджанский','native'],['Английский','C1'],['Русский','B2']], hobbies:'Шахматы, фотография, походы' }
+  }
+};
+const LANG_KEYS = ['native','C1','B2','B1','A2','A1'];
+const L = () => I18N[state.lang] || I18N.az;
+const tu = k => L().ui[k] ?? I18N.az.ui[k] ?? k;
+const tm = k => L().msg[k] ?? I18N.az.msg[k] ?? k;
+// language level stored as key; older saves stored the Azerbaijani label
+function lvlKey(v){ if(LANG_KEYS.includes(v)) return v; for(const lg of Object.values(I18N)) for(const k of LANG_KEYS) if(lg.lvl[k]===v) return k; return v; }
+const lvlName = v => L().lvl[lvlKey(v)] || v;
+const skillLevelName = v => L().skill[v] || v;
+
 /* ==================== TEMPLATES ==================== */
 const TEMPLATES = [
-  ['modern','Modern','<i style="left:0;top:0;bottom:0;width:32%"></i>'],
-  ['classic','Klassik','<i style="left:0;right:0;top:0;height:22%"></i>'],
-  ['minimal','Minimal','<i style="left:10%;right:10%;top:36%;height:3px"></i>'],
-  ['creative','Kreativ','<i style="left:0;right:0;top:0;height:28%"></i><i style="right:0;top:28%;bottom:0;width:36%;opacity:.15"></i>'],
-  ['corporate','Korporativ','<i style="right:0;top:0;bottom:0;width:34%;background:#cbd5e1"></i><i style="left:8%;top:18%;width:7px;height:7px"></i><i style="left:8%;top:50%;width:7px;height:7px"></i>'],
-  ['elegant','Elegant','<i style="left:28%;right:28%;top:26%;height:2px"></i><i style="left:28%;right:28%;top:32%;height:1px"></i><i style="left:40%;right:40%;top:60%;height:1px;opacity:.5"></i>'],
-  ['timeline','Zaman xətti','<i style="left:24%;top:30%;bottom:8%;width:2px;opacity:.4"></i><i style="left:20%;top:38%;width:9px;height:9px;border-radius:50%"></i><i style="left:20%;top:68%;width:9px;height:9px;border-radius:50%"></i>'],
-  ['compact','Kompakt','<i style="left:8%;right:8%;top:8%;height:16%;background:#111827"></i><i style="left:8%;top:36%;width:38%;height:4px"></i><i style="left:54%;top:36%;width:38%;height:4px"></i><i style="left:8%;top:66%;width:38%;height:4px"></i><i style="left:54%;top:66%;width:38%;height:4px"></i>'],
+  ['modern','<i style="left:0;top:0;bottom:0;width:32%"></i>'],
+  ['classic','<i style="left:0;right:0;top:0;height:22%"></i>'],
+  ['minimal','<i style="left:10%;right:10%;top:36%;height:3px"></i>'],
+  ['creative','<i style="left:0;right:0;top:0;height:28%"></i><i style="right:0;top:28%;bottom:0;width:36%;opacity:.15"></i>'],
+  ['corporate','<i style="right:0;top:0;bottom:0;width:34%;background:#cbd5e1"></i><i style="left:8%;top:18%;width:7px;height:7px"></i><i style="left:8%;top:50%;width:7px;height:7px"></i>'],
+  ['elegant','<i style="left:28%;right:28%;top:26%;height:2px"></i><i style="left:28%;right:28%;top:32%;height:1px"></i><i style="left:40%;right:40%;top:60%;height:1px;opacity:.5"></i>'],
+  ['timeline','<i style="left:24%;top:30%;bottom:8%;width:2px;opacity:.4"></i><i style="left:20%;top:38%;width:9px;height:9px;border-radius:50%"></i><i style="left:20%;top:68%;width:9px;height:9px;border-radius:50%"></i>'],
+  ['compact','<i style="left:8%;right:8%;top:8%;height:16%;background:#111827"></i><i style="left:8%;top:36%;width:38%;height:4px"></i><i style="left:54%;top:36%;width:38%;height:4px"></i><i style="left:8%;top:66%;width:38%;height:4px"></i><i style="left:54%;top:66%;width:38%;height:4px"></i>'],
 ];
 
 /* ==================== STATE ==================== */
 const STORAGE_KEY = 'cv-generator-v1';
+const guessLang = () => { const n=(navigator.language||'az').slice(0,2).toLowerCase(); return n==='ru'?'ru':n==='en'?'en':'az'; };
 const defaultState = () => ({
-  template:'modern', accent:'#2563eb', fontSize:10.5, photo:'',
+  lang: guessLang(), template:'modern', accent:'#2563eb', fontSize:10.5, photo:'',
   name:'', title:'', email:'', phone:'', location:'', website:'', birth:'', license:'', summary:'', hobbies:'',
   experience:[], education:[], certificates:[], skills:[], languages:[]
 });
 let state = Object.assign(defaultState(), load() || {});
+if(!I18N[state.lang]) state.lang = 'az';
+state.languages = (state.languages||[]).map(l => ({...l, level:lvlKey(l.level)}));
 
-function load(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)); }catch(e){ return null; } }
+function load(){ try{ const d=JSON.parse(localStorage.getItem(STORAGE_KEY)); if(d && !d.lang) d.lang='az'; return d; }catch(e){ return null; } }
 let saveTimer;
 function save(){ clearTimeout(saveTimer); saveTimer = setTimeout(()=>{ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }, 300); }
 function update(){ save(); render(); }
@@ -449,7 +580,7 @@ $$('[data-k]').forEach(el => {
 });
 
 // templates grid
-$('#templates').innerHTML = TEMPLATES.map(([k,n,th]) => `<div class="tpl" data-t="${k}"><div class="thumb">${th}</div>${n}</div>`).join('');
+$('#templates').innerHTML = TEMPLATES.map(([k,th]) => `<div class="tpl" data-t="${k}"><div class="thumb">${th}</div><span class="tpl-name"></span></div>`).join('');
 $$('.tpl').forEach(t => t.addEventListener('click', () => { state.template = t.dataset.t; syncDesign(); update(); }));
 $$('.swatch').forEach(s => s.addEventListener('click', () => { state.accent = s.dataset.c; syncDesign(); update(); }));
 $('#customColor').addEventListener('input', e => { state.accent = e.target.value; syncDesign(); update(); });
@@ -483,48 +614,39 @@ $('#photo').addEventListener('change', e => {
     state.photo = c.toDataURL('image/jpeg', .85); URL.revokeObjectURL(url);
     syncPhoto(); update();
   };
-  img.onerror = () => toast('Şəkil oxuna bilmədi');
+  img.onerror = () => toast(tm('photoErr'));
   img.src = url; e.target.value = '';
 });
 $('#removePhoto').addEventListener('click', () => { state.photo=''; syncPhoto(); update(); });
 const PHOTO_DEFAULT = $('#photoPreview').src;
 function syncPhoto(){ $('#photoPreview').src = state.photo || PHOTO_DEFAULT; }
 
-/* ---- Repeating lists ---- */
+/* ---- Repeating lists (labels come from I18N[lang].fields) ---- */
 const listDefs = {
-  experience:{ el:'#expList', add:'#addExp', fields:[
-    ['position','Vəzifə','Frontend Developer'], ['company','Şirkət','ABC MMC'],
-    ['start','Başlama','2021-01','month'], ['end','Bitmə (boş = davam edir)','2024-06','month'],
-    ['location','Yer','Bakı'], ['desc','Təsvir / nailiyyətlər (hər sətir ayrı bənd)','• Komandaya rəhbərlik etdim\n• Satışları 30% artırdım','textarea']
-  ]},
-  education:{ el:'#eduList', add:'#addEdu', fields:[
-    ['degree','Dərəcə / İxtisas','Bakalavr, Kompüter elmləri'], ['school','Təhsil müəssisəsi','Bakı Dövlət Universiteti'],
-    ['start','Başlama','2015-09','month'], ['end','Bitmə','2019-06','month'],
-    ['desc','Əlavə məlumat (GPA, fəxri fərman və s.)','GPA 91/100','textarea']
-  ]},
-  certificates:{ el:'#certList', add:'#addCert', fields:[
-    ['name','Sertifikat adı','Google UX Design'], ['issuer','Verən təşkilat','Coursera'],
-    ['date','Tarix','2023-05','month'], ['url','Link (istəyə görə)','https://...','url']
-  ]},
+  experience:{ el:'#expList', add:'#addExp', fields:[['position'],['company'],['start','month'],['end','month'],['location'],['desc','textarea']] },
+  education:{ el:'#eduList', add:'#addEdu', fields:[['degree'],['school'],['start','month'],['end','month'],['desc','textarea']] },
+  certificates:{ el:'#certList', add:'#addCert', fields:[['name'],['issuer'],['date','month'],['url','url']] },
 };
+const MONTH_PH = {start:'2021-01', end:'2024-06', date:'2023-05'};
 
 function renderList(key){
   const def = listDefs[key]; const wrap = $(def.el); wrap.innerHTML=''; wrap.style.cssText='display:flex;flex-direction:column;gap:10px';
+  const F = L().fields[key];
   state[key].forEach((item, idx) => {
     const d = document.createElement('div'); d.className='item';
-    const fieldsHtml = def.fields.map(([k,label,ph,type]) => {
-      const t = type||'text';
+    const fieldsHtml = def.fields.map(([k,type]) => {
+      const t = type||'text'; const [label, ph0] = F[k]; const ph = ph0 ?? MONTH_PH[k] ?? '';
       const input = t==='textarea'
         ? `<textarea data-f="${k}" placeholder="${esc(ph)}">${esc(item[k]||'')}</textarea>`
         : `<input type="${t}" data-f="${k}" placeholder="${esc(ph)}" value="${esc(item[k]||'')}">`;
-      return `<div class="field" ${t==='textarea'?'style="grid-column:1/-1"':''}><label>${label}</label>${input}</div>`;
+      return `<div class="field" ${t==='textarea'?'style="grid-column:1/-1"':''}><label>${esc(label)}</label>${input}</div>`;
     }).join('');
     d.innerHTML = `<div class="row">${fieldsHtml}</div>
       <div class="item-actions"><span class="num">#${idx+1}</span>
       <div style="display:flex;gap:6px">
-        <button class="btn small icon" data-act="up" title="Yuxarı" ${idx===0?'disabled':''}>↑</button>
-        <button class="btn small icon" data-act="down" title="Aşağı" ${idx===state[key].length-1?'disabled':''}>↓</button>
-        <button class="btn small danger" data-act="del">Sil</button></div></div>`;
+        <button class="btn small icon" data-act="up" title="${esc(tu('up'))}" ${idx===0?'disabled':''}>↑</button>
+        <button class="btn small icon" data-act="down" title="${esc(tu('down'))}" ${idx===state[key].length-1?'disabled':''}>↓</button>
+        <button class="btn small danger" data-act="del">${esc(tu('del'))}</button></div></div>`;
     d.querySelectorAll('[data-f]').forEach(inp => inp.addEventListener('input', () => { item[inp.dataset.f] = inp.value; update(); }));
     d.querySelector('[data-act=del]').onclick = () => { state[key].splice(idx,1); renderList(key); update(); };
     d.querySelector('[data-act=up]').onclick = () => { [state[key][idx-1],state[key][idx]]=[state[key][idx],state[key][idx-1]]; renderList(key); update(); };
@@ -540,23 +662,43 @@ Object.entries(listDefs).forEach(([key,def]) => {
 /* ---- Tags ---- */
 function bindTags(key, inputSel, levelSel, addSel, tagsSel, levelLabel){
   const input=$(inputSel), level=$(levelSel), wrap=$(tagsSel);
-  const add = () => { const v=input.value.trim(); if(!v) return; state[key].push({name:v, level:level.value}); input.value=''; renderTags(); update(); };
+  const add = () => { const v=input.value.trim(); if(!v) return; state[key].push({name:v, level:key==='skills'?+level.value:level.value}); input.value=''; renderTags(); update(); };
   input.addEventListener('keydown', e => { if(e.key==='Enter'){ e.preventDefault(); add(); } });
   $(addSel).addEventListener('click', add);
   function renderTags(){
-    wrap.innerHTML = state[key].map((s,i)=>`<span class="tag">${esc(s.name)} <small style="opacity:.7">· ${esc(levelLabel(s.level))}</small><button data-i="${i}" title="Sil">×</button></span>`).join('');
+    wrap.innerHTML = state[key].map((s,i)=>`<span class="tag">${esc(s.name)} <small style="opacity:.7">· ${esc(levelLabel(s.level))}</small><button data-i="${i}" title="${esc(tu('del'))}">×</button></span>`).join('');
     wrap.querySelectorAll('button').forEach(b => b.onclick = () => { state[key].splice(+b.dataset.i,1); renderTags(); update(); });
   }
   return renderTags;
 }
-const skillLevelName = v => ({100:'Ekspert',80:'Yaxşı',60:'Orta',40:'Başlanğıc'})[v] || v;
 const renderSkills = bindTags('skills','#skillInput','#skillLevel','#addSkill','#skillTags', skillLevelName);
-const renderLangs  = bindTags('languages','#langInput','#langLevel','#addLang','#langTags', v=>v);
+const renderLangs  = bindTags('languages','#langInput','#langLevel','#addLang','#langTags', lvlName);
+
+/* ---- Apply UI language ---- */
+function fillSelect(sel, pairs, fallback){
+  const cur = sel.value || fallback;
+  sel.innerHTML = pairs.map(([v,n]) => `<option value="${v}">${esc(n)}</option>`).join('');
+  sel.value = cur;
+}
+function applyLang(){
+  const lg = state.lang;
+  document.documentElement.lang = lg;
+  document.title = L().docTitle;
+  $('#uiLang').value = lg;
+  $$('[data-i]').forEach(el => { if(el.closest('.tags')) return; el.textContent = tu(el.dataset.i); });
+  $$('[data-i-ph]').forEach(el => el.placeholder = tu(el.dataset.iPh));
+  $$('[data-i-title]').forEach(el => el.title = tu(el.dataset.iTitle));
+  $$('.tpl').forEach(t => t.querySelector('.tpl-name').textContent = L().tpl[t.dataset.t]);
+  fillSelect($('#skillLevel'), [100,80,60,40].map(v => [v, L().skill[v]]), '80');
+  fillSelect($('#langLevel'), LANG_KEYS.map(k => [k, L().lvl[k]]), 'C1');
+  Object.keys(listDefs).forEach(renderList);
+  renderSkills(); renderLangs();
+}
+$('#uiLang').addEventListener('change', e => { state.lang = e.target.value; applyLang(); update(); });
 
 /* ==================== PREVIEW BUILDING BLOCKS ==================== */
-const MONTHS = ['Yan','Fev','Mar','Apr','May','İyn','İyl','Avq','Sen','Okt','Noy','Dek'];
-function fmtDate(v){ if(!v) return ''; const [y,m]=v.split('-'); return m ? `${MONTHS[+m-1]} ${y}` : y; }
-function range(a,b, ongoing='Davam edir'){ const s=fmtDate(a), e=fmtDate(b); if(!s&&!e) return ''; return `${s}${s&&(e||ongoing)?' – ':''}${e||(s?ongoing:'')}`; }
+function fmtDate(v){ if(!v) return ''; const [y,m]=v.split('-'); return m ? `${L().months[+m-1]} ${y}` : y; }
+function range(a,b, ongoing=L().present){ const s=fmtDate(a), e=fmtDate(b); if(!s&&!e) return ''; return `${s}${s&&(e||ongoing)?' – ':''}${e||(s?ongoing:'')}`; }
 function descHtml(d){ if(!d) return ''; const lines=d.split('\n').map(l=>l.trim()).filter(Boolean);
   if(lines.length && lines.every(l=>/^[•\-\*]/.test(l))) return `<ul>${lines.map(l=>`<li>${esc(l.replace(/^[•\-\*]\s*/,''))}</li>`).join('')}</ul>`;
   return `<div class="desc">${esc(d)}</div>`; }
@@ -573,27 +715,29 @@ function contactItems(s){
   if(s.license) items.push(['🚗', esc(s.license)]);
   return items;
 }
+const empty = k => `<span class="empty-note">${esc(L().sec[k])}</span>`;
 // entry: generic markup; `node` adds timeline node column
 const entry = (date, top, sub, body, node=false) => `<div class="entry"><div class="date">${date}</div>${node?'<div class="node"></div>':''}<div class="ebody"><div class="top">${top}</div>${sub?`<div class="sub">${sub}</div>`:''}${body||''}</div></div>`;
-const expEntries = (node) => nz(state.experience).map(e => entry(range(e.start,e.end), esc(e.position)||'<span class="empty-note">Vəzifə</span>', [esc(e.company),esc(e.location)].filter(Boolean).join(' · '), descHtml(e.desc), node)).join('');
-const eduEntries = (node) => nz(state.education).map(e => entry(range(e.start,e.end,''), esc(e.degree)||'<span class="empty-note">İxtisas</span>', esc(e.school), descHtml(e.desc), node)).join('');
+const expEntries = (node) => nz(state.experience).map(e => entry(range(e.start,e.end), esc(e.position)||empty('position'), [esc(e.company),esc(e.location)].filter(Boolean).join(' · '), descHtml(e.desc), node)).join('');
+const eduEntries = (node) => nz(state.education).map(e => entry(range(e.start,e.end,''), esc(e.degree)||empty('degree'), esc(e.school), descHtml(e.desc), node)).join('');
 const certEntries = (node) => nz(state.certificates).map(c => entry(fmtDate(c.date), c.url?`<a href="${esc(c.url)}">${esc(c.name)}</a>`:esc(c.name), esc(c.issuer), '', node)).join('');
 
 const skillsBars = () => state.skills.map(k=>`<div class="skill">${esc(k.name)}<div class="bar"><span style="width:${k.level}%"></span></div></div>`).join('');
 const skillsPills = (solid) => state.skills.map(k=>`<span class="pill ${solid?'solid':''}">${esc(k.name)} <span class="pill-lvl">· ${esc(skillLevelName(k.level))}</span></span>`).join('');
 const skillsDots = () => state.skills.map(k=>`<div class="dotlist"><div><span>${esc(k.name)}</span><span class="dots">${[1,2,3,4,5].map(i=>`<i class="${i<=Math.round(k.level/20)?'on':''}"></i>`).join('')}</span></div></div>`).join('');
 const skillsGrid = (cols=3) => `<div class="grid${cols}">${state.skills.map(k=>`<div>${esc(k.name)} <span class="lvl">(${esc(skillLevelName(k.level))})</span></div>`).join('')}</div>`;
-const langsList = () => `<div class="dotlist">${state.languages.map(l=>`<div><span>${esc(l.name)}</span><span class="lvl">${esc(l.level)}</span></div>`).join('')}</div>`;
-const langsInline = () => state.languages.map(l=>`${esc(l.name)} <span class="lvl">(${esc(l.level)})</span>`).join(' &nbsp;·&nbsp; ');
+const langsList = () => `<div class="dotlist">${state.languages.map(l=>`<div><span>${esc(l.name)}</span><span class="lvl">${esc(lvlName(l.level))}</span></div>`).join('')}</div>`;
 const contactList = (items) => `<div class="contact-list">${items.map(([i,v])=>`<div><span>${i}</span><span>${v}</span></div>`).join('')}</div>`;
 const contactInline = (items, sep='') => items.map(([i,v])=>`<span>${i} ${v}</span>`).join(sep);
 const sec = (title, body, cls='') => body ? `<section class="sec ${cls}"><h2>${title}</h2>${body}</section>` : '';
 const secT = (title, body, cls='') => body ? `<section class="sec ${cls}"><h2><span>${title}</span></h2>${body}</section>` : '';
+function skillsPillsFrom(arr){ return arr.map(h=>`<span class="pill">${esc(h)}</span>`).join(''); }
 
 /* ==================== RENDER ==================== */
 function render(){
-  const s=state, page=$('#page'); page.style.setProperty('--fs', s.fontSize+'pt');
-  const name = esc(s.name)||'<span class="empty-note">Ad Soyad</span>';
+  const s=state, page=$('#page'), S=L().sec; page.style.setProperty('--fs', s.fontSize+'pt');
+  page.lang = s.lang;
+  const name = esc(s.name)||empty('fullName');
   const title = esc(s.title);
   const ct = contactItems(s);
   const photo = (cls='photo') => s.photo?`<img class="${cls}" src="${s.photo}" alt="">`:'';
@@ -604,12 +748,12 @@ function render(){
 
   if(T==='modern'){
     html = `<div class="t-modern"><aside class="side">${photo()}
-        ${ct.length?`<h3>Əlaqə</h3>${contactList(ct)}`:''}
-        ${s.skills.length?`<h3>Bacarıqlar</h3>${skillsBars()}`:''}
-        ${s.languages.length?`<h3>Dillər</h3>${s.languages.map(l=>`<div class="skill">${esc(l.name)} <span style="opacity:.8;font-size:9pt">— ${esc(l.level)}</span></div>`).join('')}`:''}
-        ${hob.length?`<h3>Maraqlar</h3><div style="font-size:9.5pt">${hob.map(esc).join(' · ')}</div>`:''}
+        ${ct.length?`<h3>${S.contact}</h3>${contactList(ct)}`:''}
+        ${s.skills.length?`<h3>${S.skills}</h3>${skillsBars()}`:''}
+        ${s.languages.length?`<h3>${S.langs}</h3>${s.languages.map(l=>`<div class="skill">${esc(l.name)} <span style="opacity:.8;font-size:9pt">— ${esc(lvlName(l.level))}</span></div>`).join('')}`:''}
+        ${hob.length?`<h3>${S.hobbies}</h3><div style="font-size:9.5pt">${hob.map(esc).join(' · ')}</div>`:''}
       </aside><div class="main"><h1>${name}</h1>${title?`<div class="title">${title}</div>`:''}
-        ${sec('Haqqımda',summary)}${sec('İş təcrübəsi',hasExp&&expEntries())}${sec('Təhsil',hasEdu&&eduEntries())}${sec('Sertifikatlar',hasCert&&certEntries())}
+        ${sec(S.about,summary)}${sec(S.exp,hasExp&&expEntries())}${sec(S.edu,hasEdu&&eduEntries())}${sec(S.certs,hasCert&&certEntries())}
       </div></div>`;
   }
   else if(T==='classic'){
@@ -617,74 +761,73 @@ function render(){
       <div class="head">${photo()}<div><h1>${name}</h1>${title?`<div class="title">${title}</div>`:''}</div></div>
       ${ct.length?`<div class="contact">${contactInline(ct)}</div>`:''}
       <div class="body">
-        ${sec('Haqqımda',summary,'full')}${sec('İş təcrübəsi',hasExp&&expEntries(),'full')}
-        ${sec('Təhsil',hasEdu&&eduEntries(),hasCert?'':'full')}${sec('Sertifikatlar',hasCert&&certEntries(),hasEdu?'':'full')}
-        ${sec('Bacarıqlar',s.skills.length&&skillsPills())}${sec('Dillər',s.languages.length&&langsList())}
-        ${sec('Maraqlar',hob.length&&hob.map(esc).join(' · '),'full')}
+        ${sec(S.about,summary,'full')}${sec(S.exp,hasExp&&expEntries(),'full')}
+        ${sec(S.edu,hasEdu&&eduEntries(),hasCert?'':'full')}${sec(S.certs,hasCert&&certEntries(),hasEdu?'':'full')}
+        ${sec(S.skills,s.skills.length&&skillsPills())}${sec(S.langs,s.languages.length&&langsList())}
+        ${sec(S.hobbies,hob.length&&hob.map(esc).join(' · '),'full')}
       </div></div>`;
   }
   else if(T==='minimal'){
     html = `<div class="t-minimal">
       <div class="head"><div>${photo()}<h1>${name}</h1>${title?`<div class="title">${title}</div>`:''}</div>
         ${ct.length?`<div class="contact">${ct.map(([i,v])=>`<div>${v}</div>`).join('')}</div>`:''}</div>
-      ${sec('Haqqımda',summary)}${sec('İş təcrübəsi',hasExp&&expEntries())}${sec('Təhsil',hasEdu&&eduEntries())}${sec('Sertifikatlar',hasCert&&certEntries())}
-      ${sec('Bacarıqlar',s.skills.length&&skillsGrid(3))}
-      ${sec('Dillər',s.languages.length&&`<div class="grid3">${s.languages.map(l=>`<div>${esc(l.name)} <span class="lvl">(${esc(l.level)})</span></div>`).join('')}</div>`)}
-      ${sec('Maraqlar',hob.length&&hob.map(esc).join(' · '))}
+      ${sec(S.about,summary)}${sec(S.exp,hasExp&&expEntries())}${sec(S.edu,hasEdu&&eduEntries())}${sec(S.certs,hasCert&&certEntries())}
+      ${sec(S.skills,s.skills.length&&skillsGrid(3))}
+      ${sec(S.langs,s.languages.length&&`<div class="grid3">${s.languages.map(l=>`<div>${esc(l.name)} <span class="lvl">(${esc(lvlName(l.level))})</span></div>`).join('')}</div>`)}
+      ${sec(S.hobbies,hob.length&&hob.map(esc).join(' · '))}
     </div>`;
   }
   else if(T==='creative'){
     html = `<div class="t-creative">
       <div class="head">${photo()}<div><h1>${name}</h1>${title?`<div class="title">${title}</div>`:''}</div></div>
       <div class="body"><div class="left">
-        ${sec('Haqqımda',summary)}${sec('İş təcrübəsi',hasExp&&expEntries())}${sec('Təhsil',hasEdu&&eduEntries())}${sec('Sertifikatlar',hasCert&&certEntries())}
+        ${sec(S.about,summary)}${sec(S.exp,hasExp&&expEntries())}${sec(S.edu,hasEdu&&eduEntries())}${sec(S.certs,hasCert&&certEntries())}
       </div><div class="right">
-        ${sec('Əlaqə',ct.length&&contactList(ct))}${sec('Bacarıqlar',s.skills.length&&skillsBars())}
-        ${sec('Dillər',s.languages.length&&langsList())}${sec('Maraqlar',hob.length&&skillsPillsFrom(hob))}
+        ${sec(S.contact,ct.length&&contactList(ct))}${sec(S.skills,s.skills.length&&skillsBars())}
+        ${sec(S.langs,s.languages.length&&langsList())}${sec(S.hobbies,hob.length&&skillsPillsFrom(hob))}
       </div></div></div>`;
   }
   else if(T==='corporate'){
     html = `<div class="t-corporate"><div class="main"><h1>${name}</h1>${title?`<div class="title">${title}</div>`:''}
-        ${sec('Profil',summary)}${sec('İş təcrübəsi',hasExp&&expEntries())}${sec('Təhsil',hasEdu&&eduEntries())}${sec('Sertifikatlar',hasCert&&certEntries())}
+        ${sec(S.profile,summary)}${sec(S.exp,hasExp&&expEntries())}${sec(S.edu,hasEdu&&eduEntries())}${sec(S.certs,hasCert&&certEntries())}
       </div><aside class="side">${photo()}
-        ${sec('Əlaqə',ct.length&&contactList(ct))}${sec('Bacarıqlar',s.skills.length&&skillsBars())}
-        ${sec('Dillər',s.languages.length&&langsList())}${sec('Maraqlar',hob.length&&hob.map(esc).join(', '))}
+        ${sec(S.contact,ct.length&&contactList(ct))}${sec(S.skills,s.skills.length&&skillsBars())}
+        ${sec(S.langs,s.languages.length&&langsList())}${sec(S.hobbies,hob.length&&hob.map(esc).join(', '))}
       </aside></div>`;
   }
   else if(T==='elegant'){
     html = `<div class="t-elegant">
       <div class="head">${photo()}<h1>${name}</h1>${title?`<div class="title">${title}</div>`:''}
         ${ct.length?`<div class="contact">${ct.map(([i,v])=>`<span>${v}</span>`).join('')}</div>`:''}</div>
-      ${sec('Haqqımda',summary&&`<div class="center">${summary}</div>`)}${sec('İş təcrübəsi',hasExp&&expEntries())}${sec('Təhsil',hasEdu&&eduEntries())}${sec('Sertifikatlar',hasCert&&certEntries())}
-      <div class="cols">${sec('Bacarıqlar',s.skills.length&&skillsDots())}${sec('Dillər',s.languages.length&&langsList())}</div>
-      ${sec('Maraqlar',hob.length&&`<div class="center">${hob.map(esc).join(' · ')}</div>`)}
+      ${sec(S.about,summary&&`<div class="center">${summary}</div>`)}${sec(S.exp,hasExp&&expEntries())}${sec(S.edu,hasEdu&&eduEntries())}${sec(S.certs,hasCert&&certEntries())}
+      <div class="cols">${sec(S.skills,s.skills.length&&skillsDots())}${sec(S.langs,s.languages.length&&langsList())}</div>
+      ${sec(S.hobbies,hob.length&&`<div class="center">${hob.map(esc).join(' · ')}</div>`)}
     </div>`;
   }
   else if(T==='timeline'){
     html = `<div class="t-timeline">
       <div class="head">${photo()}<div><h1>${name}</h1>${title?`<div class="title">${title}</div>`:''}</div></div>
       ${ct.length?`<div class="contactbar">${contactInline(ct)}</div>`:''}
-      ${secT('Haqqımda',summary)}
-      ${secT('İş təcrübəsi',hasExp&&`<div class="tl">${expEntries(true)}</div>`)}
-      ${secT('Təhsil',hasEdu&&`<div class="tl">${eduEntries(true)}</div>`)}
-      ${secT('Sertifikatlar',hasCert&&`<div class="tl">${certEntries(true)}</div>`)}
-      <div class="cols">${secT('Bacarıqlar',s.skills.length&&skillsPills(true))}${secT('Dillər',s.languages.length&&langsList())}</div>
-      ${secT('Maraqlar',hob.length&&hob.map(esc).join(' · '))}
+      ${secT(S.about,summary)}
+      ${secT(S.exp,hasExp&&`<div class="tl">${expEntries(true)}</div>`)}
+      ${secT(S.edu,hasEdu&&`<div class="tl">${eduEntries(true)}</div>`)}
+      ${secT(S.certs,hasCert&&`<div class="tl">${certEntries(true)}</div>`)}
+      <div class="cols">${secT(S.skills,s.skills.length&&skillsPills(true))}${secT(S.langs,s.languages.length&&langsList())}</div>
+      ${secT(S.hobbies,hob.length&&hob.map(esc).join(' · '))}
     </div>`;
   }
   else { // compact
     html = `<div class="t-compact">
       <div class="head"><div style="display:flex;align-items:center">${photo()}<div><h1>${name}</h1>${title?`<div class="title">${title}</div>`:''}</div></div>
         ${ct.length?`<div class="contact">${ct.map(([i,v])=>`<div>${v}</div>`).join('')}</div>`:''}</div>
-      ${sec('Haqqımda',summary)}
-      <div class="cols"><div>${sec('İş təcrübəsi',hasExp&&expEntries())}${sec('Sertifikatlar',hasCert&&certEntries())}</div>
-      <div>${sec('Təhsil',hasEdu&&eduEntries())}${sec('Bacarıqlar',s.skills.length&&skillsGrid(2))}${sec('Dillər',s.languages.length&&langsList())}${sec('Maraqlar',hob.length&&hob.map(esc).join(', '))}</div></div>
+      ${sec(S.about,summary)}
+      <div class="cols"><div>${sec(S.exp,hasExp&&expEntries())}${sec(S.certs,hasCert&&certEntries())}</div>
+      <div>${sec(S.edu,hasEdu&&eduEntries())}${sec(S.skills,s.skills.length&&skillsGrid(2))}${sec(S.langs,s.languages.length&&langsList())}${sec(S.hobbies,hob.length&&hob.map(esc).join(', '))}</div></div>
     </div>`;
   }
   page.innerHTML = html;
   fitPreview();
 }
-function skillsPillsFrom(arr){ return arr.map(h=>`<span class="pill">${esc(h)}</span>`).join(''); }
 
 /* ---- Preview scaling (fit page width to container) ---- */
 const PAGE_W = 794; // 210mm @ 96dpi
@@ -706,8 +849,8 @@ $$('#tabbar [data-view]').forEach(b => b.addEventListener('click', () => setView
 
 /* ==================== PDF ==================== */
 async function makePdf(){
-  if(!state.name){ toast('Əvvəlcə ad və soyadınızı yazın'); }
-  const fname = (state.name||'CV').replace(/[^\p{L}\p{N}]+/gu,'_') + '_CV.pdf';
+  if(!state.name){ toast(tm('needName')); }
+  const fname = (state.name||'CV').replace(/[^\p{L}\p{N}]+/gu,'_') + '_CV_' + state.lang.toUpperCase() + '.pdf';
   const btns = [$('#btnPrint'), $('#btnPdfMobile')]; btns.forEach(b=>b.disabled=true);
   $('#overlay').classList.add('show');
   try{
@@ -721,12 +864,12 @@ async function makePdf(){
       const { Filesystem, Share } = Capacitor.Plugins;
       const res = await Filesystem.writeFile({ path:fname, data, directory:'CACHE' });
       $('#overlay').classList.remove('show');
-      await Share.share({ title:fname, url:res.uri, dialogTitle:'CV-ni saxla və ya paylaş' });
+      await Share.share({ title:fname, url:res.uri, dialogTitle:tm('shareCv') });
     } else {
       await worker.save();
-      toast('PDF yükləndi');
+      toast(tm('pdfDone'));
     }
-  }catch(err){ console.error(err); if(!/cancel/i.test(String(err?.message))) toast('PDF yaradıla bilmədi: '+(err?.message||err), 4000); }
+  }catch(err){ console.error(err); if(!/cancel/i.test(String(err?.message))) toast(tm('pdfFail')+(err?.message||err), 4000); }
   finally{ $('#overlay').classList.remove('show'); btns.forEach(b=>b.disabled=false); }
 }
 $('#btnPrint').addEventListener('click', makePdf);
@@ -738,17 +881,20 @@ async function exportJson(){
   if(isNative()){
     try{ const { Filesystem, Share } = Capacitor.Plugins;
       const res = await Filesystem.writeFile({ path:fname, data:json, directory:'CACHE', encoding:'utf8' });
-      await Share.share({ title:fname, url:res.uri, dialogTitle:'JSON faylını saxla' }); }catch(e){ if(!/cancel/i.test(String(e?.message))) toast('Saxlanıla bilmədi'); }
+      await Share.share({ title:fname, url:res.uri, dialogTitle:tm('shareJson') }); }catch(e){ if(!/cancel/i.test(String(e?.message))) toast(tm('saveFail')); }
     return;
   }
   const blob = new Blob([json],{type:'application/json'});
-  const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=fname; a.click(); URL.revokeObjectURL(a.href); toast('JSON faylı yükləndi');
+  const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=fname; a.click(); URL.revokeObjectURL(a.href); toast(tm('jsonDone'));
 }
 $('#btnExport').addEventListener('click', exportJson);
 $('#btnImport').addEventListener('click', () => $('#fileImport').click());
 $('#fileImport').addEventListener('change', e => {
   const f=e.target.files[0]; if(!f) return; const r=new FileReader();
-  r.onload = () => { try{ const d=JSON.parse(r.result); if(typeof d!=='object'||!d) throw 0; state = Object.assign(defaultState(), d); hydrate(); update(); toast('CV yükləndi'); }catch(err){ toast('Fayl oxuna bilmədi'); } };
+  r.onload = () => { try{ const d=JSON.parse(r.result); if(typeof d!=='object'||!d) throw 0;
+    const lang = I18N[d.lang] ? d.lang : state.lang;
+    state = Object.assign(defaultState(), d, {lang}); state.languages = (state.languages||[]).map(l => ({...l, level:lvlKey(l.level)}));
+    hydrate(); update(); toast(tm('loaded')); }catch(err){ toast(tm('readFail')); } };
   r.readAsText(f); e.target.value='';
 });
 // Custom confirm: native confirm() is blocked in some WebViews / embedded browsers
@@ -759,33 +905,32 @@ function askConfirm(msg){ return new Promise(res => {
   dlg.onclick = e => { if(e.target===dlg) done(false); };
 }); }
 $('#btnClear').addEventListener('click', async () => {
-  if(!(await askConfirm('Bütün məlumatlar silinsin? Bu əməliyyat geri qaytarıla bilməz.'))) return;
-  const {template,accent,fontSize}=state; state=Object.assign(defaultState(),{template,accent,fontSize}); hydrate(); update(); toast('Təmizləndi');
+  if(!(await askConfirm(tm('confirmClear')))) return;
+  const {lang,template,accent,fontSize}=state; state=Object.assign(defaultState(),{lang,template,accent,fontSize}); hydrate(); update(); toast(tm('cleared'));
 });
 $('#btnSample').addEventListener('click', () => {
-  const {template,accent,fontSize}=state;
-  state = Object.assign(defaultState(), {template,accent,fontSize,
-    name:'Elman Məmmədov', title:'Frontend Developer', email:'elman@example.com', phone:'+994 50 123 45 67', location:'Bakı, Azərbaycan', website:'linkedin.com/in/elman', birth:'15.03.1996', license:'B kateqoriya',
-    summary:'5 ildən artıq təcrübəsi olan Frontend Developer. React, TypeScript və modern veb texnologiyaları ilə yüksək performanslı, istifadəçi dostu interfeyslər hazırlayıram. Komanda ilə işləməyi və yeni texnologiyalar öyrənməyi sevirəm.',
+  const {lang,template,accent,fontSize}=state, X=L().sample;
+  state = Object.assign(defaultState(), {lang,template,accent,fontSize,
+    name:X.name, title:X.title, email:'elman@example.com', phone:'+994 50 123 45 67', location:X.location, website:'linkedin.com/in/elman', birth:'15.03.1996', license:X.license,
+    summary:X.summary,
     experience:[
-      {id:uid(), position:'Senior Frontend Developer', company:'TechAz MMC', location:'Bakı', start:'2022-03', end:'', desc:'• 6 nəfərlik frontend komandasına rəhbərlik etdim\n• Səhifə yüklənmə sürətini 45% artırdım\n• Dizayn sistemini sıfırdan qurdum'},
-      {id:uid(), position:'Frontend Developer', company:'Digital Solutions', location:'Bakı', start:'2019-07', end:'2022-02', desc:'• React və Redux ilə 10+ layihə hazırladım\n• REST API inteqrasiyaları və test avtomatlaşdırması'}
+      {id:uid(), position:X.exp[0][0], company:X.exp[0][1], location:X.exp[0][2], start:'2022-03', end:'', desc:X.exp[0][3]},
+      {id:uid(), position:X.exp[1][0], company:X.exp[1][1], location:X.exp[1][2], start:'2019-07', end:'2022-02', desc:X.exp[1][3]}
     ],
-    education:[{id:uid(), degree:'Bakalavr, İnformasiya texnologiyaları', school:'Azərbaycan Texniki Universiteti', start:'2014-09', end:'2018-06', desc:'GPA: 89/100'}],
+    education:[{id:uid(), degree:X.edu[0], school:X.edu[1], start:'2014-09', end:'2018-06', desc:'GPA: 89/100'}],
     certificates:[{id:uid(), name:'Meta Front-End Developer', issuer:'Coursera', date:'2023-04', url:''}],
     skills:[{name:'JavaScript',level:100},{name:'React',level:100},{name:'TypeScript',level:80},{name:'CSS / Sass',level:80},{name:'Node.js',level:60},{name:'Figma',level:60}],
-    languages:[{name:'Azərbaycan dili',level:'Ana dili'},{name:'İngilis dili',level:'Səlis (C1)'},{name:'Rus dili',level:'Orta (B2)'}],
-    hobbies:'Şahmat, fotoqrafiya, dağ turizmi'
+    languages:X.langs.map(([name,level])=>({name,level})),
+    hobbies:X.hobbies
   });
-  hydrate(); update(); toast('Nümunə məlumatlar dolduruldu');
+  hydrate(); update(); toast(tm('sampleDone'));
 });
 
 /* ==================== HYDRATE ==================== */
 function hydrate(){
   $$('[data-k]').forEach(el => el.value = state[el.dataset.k] || '');
   syncDesign(); syncPhoto();
-  Object.keys(listDefs).forEach(renderList);
-  renderSkills(); renderLangs();
+  applyLang();
 }
 hydrate(); render();
 
