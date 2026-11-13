@@ -86,8 +86,13 @@ Hər yeni yükləmədə `android/app/build.gradle` içində `versionCode`-u 1 ar
    ən azı 12 testçi 14 gün ərzində tətbiqi quraşdırmalıdır. Testçiləri Closed testing → Testers bölməsində e-poçtla əlavə edin.
 7. Sonra **Production → Create release** → eyni AAB (və ya yeni versiya) → Submit for review. Yoxlama adətən 1–7 gün çəkir.
 
-### 4. Məxfilik siyasəti
+### 4. Məxfilik siyasəti (GitHub Pages)
 
-`www/privacy.html` faylını internetdə yerləşdirin. Ən asan yol GitHub Pages:
-repo yaradın, `www` qovluğunu yükləyin, Settings → Pages → Branch main / folder `/www`.
-Link belə olacaq: `https://<istifadəçi>.github.io/<repo>/privacy.html`.
+Repo: https://github.com/ElmanAbdulmanafov/cv-yaradan
+`.github/workflows/pages.yml` iş axını hər push-da `www/` qovluğunu dərc edir.
+
+Birdəfəlik: repo **Settings → Pages → Build and deployment → Source** = **GitHub Actions** seçin.
+Sonra ünvanlar belə olur:
+
+- Məxfilik siyasəti: https://elmanabdulmanafov.github.io/cv-yaradan/privacy.html  ← Play Console-a bu linki yazın
+- Veb versiya: https://elmanabdulmanafov.github.io/cv-yaradan/
