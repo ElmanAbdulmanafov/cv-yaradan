@@ -89,10 +89,9 @@ Hər yeni yükləmədə `android/app/build.gradle` içində `versionCode`-u 1 ar
 ### 4. Məxfilik siyasəti (GitHub Pages)
 
 Repo: https://github.com/ElmanAbdulmanafov/cv-yaradan
-`.github/workflows/pages.yml` iş axını hər push-da `www/` qovluğunu dərc edir.
 
-Birdəfəlik: repo **Settings → Pages → Build and deployment → Source** = **GitHub Actions** seçin.
-Sonra ünvanlar belə olur:
+`www/` qovluğu `gh-pages` budağında dərc olunur. `.github/workflows/pages.yml` iş axını
+`main`-ə hər push-da `www/`-ni avtomatik `gh-pages`-ə köçürür, əl ilə heç nə etmək lazım deyil.
 
 - Məxfilik siyasəti: https://elmanabdulmanafov.github.io/cv-yaradan/privacy.html  ← Play Console-a bu linki yazın
 - Veb versiya: https://elmanabdulmanafov.github.io/cv-yaradan/
