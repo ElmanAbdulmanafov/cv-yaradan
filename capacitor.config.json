@@ -1,6 +1,6 @@
 {
   "appId": "az.cvyaradan.app",
-  "appName": "CV Yaradan",
+  "appName": "CV Creator",
   "webDir": "www",
   "android": {
     "allowMixedContent": false,

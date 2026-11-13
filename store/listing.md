@@ -5,7 +5,7 @@ Aşağıdakı mətnləri Play Console → **Grow → Store presence → Main sto
 ## Tətbiq adı (max 30 simvol)
 
 ```
-CV Yaradan — CV hazırla, PDF
+CV Creator — CV hazırla, PDF
 ```
 
 ## Qısa təsvir (max 80 simvol)
@@ -17,7 +17,7 @@ CV Yaradan — CV hazırla, PDF
 ## Tam təsvir (max 4000 simvol)
 
 ```
-CV Yaradan ilə peşəkar CV-nizi bir neçə dəqiqəyə hazırlayın. Heç bir qeydiyyat, heç bir ödəniş, heç bir internet tələb olunmur.
+CV Creator ilə peşəkar CV-nizi bir neçə dəqiqəyə hazırlayın. Heç bir qeydiyyat, heç bir ödəniş, heç bir internet tələb olunmur.
 
 ✨ 8 HAZIR ŞABLON
 Modern, Klassik, Minimal, Kreativ, Korporativ, Elegant, Zaman xətti və Kompakt. Bir toxunuşla şablonu dəyişin, məlumatlarınız qalır.

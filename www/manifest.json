@@ -1,6 +1,6 @@
 {
-  "name": "CV Yaradan",
-  "short_name": "CV Yaradan",
+  "name": "CV Creator",
+  "short_name": "CV Creator",
   "description": "Peşəkar CV hazırla — 8 şablon, PDF yükləmə",
   "start_url": "./index.html",
   "display": "standalone",
